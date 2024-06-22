@@ -1,0 +1,13 @@
+Funcionário
+user: brina	
+senha: 123
+
+Gerente
+user: admclei
+senha: adm
+
+Dono
+user: moqui
+senha: 1234
+
+  

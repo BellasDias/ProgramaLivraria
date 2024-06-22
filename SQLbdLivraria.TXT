@@ -1,0 +1,81 @@
+create database Livraria_Sinopse;
+
+create table tb_clientes(
+	cpf varchar(14) not null,
+	nome varchar(70) not null,
+	data_nasc date,
+	telefone varchar(13),
+	email varchar(40)
+);
+
+insert into tb_clientes (cpf, nome, data_nasc, telefone, email) values ('777.777.777-77','Carlos Almeida','2000-01-01','11 96554-6123','car@gmail.com');
+
+create table tb_funcionarios(
+	id int indentity(1,1) not null,
+	cpf varchar(14) primary key not null,
+	nome varchar(80) not null,
+	data_nasc date not null,
+	telefone varchar(13),
+	email varchar(25),
+	cargo varchar(20)
+);
+
+insert into tb_funcionarios (cpf, nome, data_nasc, telefone, email, cargo) 
+values ('456.452.122-15','Sabrina', '2001-02-09', '11 96548-1235', 'brina@gmail', 'Funcionário')
+
+insert into tb_funcionarios (cpf, nome, data_nasc, telefone, email, cargo) 
+values ('546.987.897-56','Cleiton', '1983-03-19', '11 92538-1235', 'cleiclei@gmail', 'Gerente')
+
+insert into tb_funcionarios (cpf, nome, data_nasc, telefone, email, cargo) 
+values ('123.685.162-16','Moqui', '1990-02-09', '11 96215-9875', 'momo@gmail', 'Dono')
+
+create table tb_vendas(
+	idVenda int primary key identity(1,1) not null,
+	cpfFunc varchar(14) not null,
+	cpfCli varchar(14),
+	total decimal(10,2) not null,
+	dataVenda datetime not null
+);
+
+create table tb_itensVenda(
+	idItem int identity(1,1) primary key not null,
+	idVenda int,
+	cod_prod varchar(10),
+	qtd int,
+	precoUni decimal(10,2)
+	foreign key (idVenda) references tb_vendas(idVenda)
+);
+
+create table tb_login(
+	LoginId int identity(1,1) primary key not null,
+	cpf varchar(14) not null,
+	entra datetime,
+	saida datetime
+	foreign key (cpf) references tb_funcionarios(cpf)
+);
+
+create table tb_produtos(
+	cod_prod varchar(10) primary key not null,
+	nome varchar(60) not null,
+	genero varchar(30) not null,
+	preco decimal(10,2) not null,
+	qtdEstoque int not null,
+	dispo varchar(20) not null,
+);
+
+insert into tb_produtos (cod_prod, nome, genero, preco, qtdEstoque, dispo) values ('525','VihTube em Uma Aventura na Floresta','Ação e Aventura','70,00','50','Disponível');
+
+create table tb_usuarios(
+	cpf varchar(14) primary key not null,
+	usuario varchar(10) not null,
+	senha varchar(10) not null,
+	cargo varchar(20) not null
+);
+
+insert into tb_usuarios (cpf, usuario, senha, cargo) values ('456.452.122-15','brina','123','Funcionário');
+
+insert into tb_usuarios (cpf, usuario, senha, cargo) values ('546.987.897-56','admclei','adm','Gerente');
+
+insert into tb_usuarios (cpf, usuario, senha, cargo) values ('123.685.162-16','moqui','1234','Dono');
+
+
